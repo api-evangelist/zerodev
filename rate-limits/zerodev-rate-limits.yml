@@ -1,0 +1,67 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: ZeroDev
+providerId: zerodev
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- Account Abstraction
+- ERC-4337
+- Paymaster
+- Bundler
+- JSON-RPC
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  ZeroDev meters its bundler and paymaster RPCs primarily by a per-plan Credit
+  pool (consumed by UserOperations and infra calls) and by an included
+  gas-sponsorship budget, rather than by published fixed per-second request
+  rates. RPC throughput limits exist per project and plan and are enforced by
+  the meta-infrastructure; specific per-method request-per-second values are not
+  published and are not reconciled in this artifact. Sponsorship policies on the
+  paymaster (per-app, per-user, per-UserOp caps) act as the primary throttle on
+  gas spend.
+notes: >-
+  Verify per-project RPC throughput limits, Credit consumption per method, and
+  paymaster sponsorship policy caps in the ZeroDev dashboard during
+  reconciliation; these vary by plan (Developer / Growth / Scale / Enterprise).
+sources:
+- https://zerodev.app/pricing
+- https://docs.zerodev.app/meta-infra/rpcs
+- https://docs.zerodev.app/sdk/core-api/sponsor-gas
+responseCodes:
+  throttled: 429
+limits:
+- name: Credits Per Month
+  scope: project
+  metric: credits
+  limit: see plan (10K Developer / 100K Growth / 1M Scale / custom Enterprise)
+  notes: UserOperations and infra calls draw down the plan Credit pool.
+- name: Gas Sponsorship Budget
+  scope: project
+  metric: usd_gas
+  limit: see plan (up to $250 Growth / up to $1,000 Scale / custom Enterprise)
+  notes: Included gas-sponsorship allowance; further sponsored gas is billed/topped up.
+- name: RPC Throughput
+  scope: project
+  metric: requests
+  limit: see provider documentation
+  notes: Per-project bundler/paymaster RPC throughput; specific RPS values not published.
+- name: Paymaster Sponsorship Policy Caps
+  scope: project
+  metric: sponsorships
+  limit: configurable
+  notes: Per-app / per-user / per-UserOp sponsorship caps configured in the dashboard.
+policies:
+- name: Credit-Metered Plans
+  description: Each plan includes a Credit pool; overage is handled by upgrading plan or top-up.
+- name: Sponsorship Gating
+  description: Paymaster sponsorship is governed by configurable policies that cap which UserOps are sponsored.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on 429 and honor Retry-After.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

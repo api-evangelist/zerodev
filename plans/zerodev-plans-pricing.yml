@@ -1,0 +1,177 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: ZeroDev
+providerId: zerodev
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- Account Abstraction
+- Smart Wallets
+- ERC-4337
+- EIP-7702
+- Paymaster
+- Bundler
+- Plans
+description: >-
+  ZeroDev sells its bundler + paymaster meta-infrastructure as flat monthly
+  plans (Developer, Growth, Scale, Enterprise) that each include a pool of
+  Credits consumed by UserOperations plus an included gas-sponsorship budget.
+  Gas sponsored to users is drawn from the included sponsorship allowance and
+  then billed/topped up at cost; Credits meter the UserOps and infra calls.
+  Self-funded paymaster deployment is gated to Scale and Enterprise.
+notes: >-
+  Plan prices and included Credits / gas-sponsorship amounts are as published on
+  the ZeroDev pricing page; verify current numbers and overage/top-up rates on
+  the dashboard during reconciliation.
+sources:
+- https://zerodev.app/pricing
+- https://docs.zerodev.app/meta-infra/rpcs
+plans:
+- id: zerodev-developer
+  name: Developer
+  type: free
+  description: >-
+    Free tier for building and testing on testnets, including testnet Credits
+    and access to gas sponsorship and community support.
+  entries:
+  - label: Monthly Price
+    name: price
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0
+    userMultiplied: false
+  - label: Testnet Credits
+    name: credits
+    type: usage
+    metric: credits
+    limit: 10000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Bundler RPC (testnet)
+  - name: Paymaster RPC (testnet)
+  - name: Kernel SDK
+  - name: Community Support Channel
+- id: zerodev-growth
+  name: Growth
+  type: paid
+  description: >-
+    For projects entering mainnet and scaling user acquisition; includes a
+    Credit pool and a gas-sponsorship allowance plus team support.
+  entries:
+  - label: Monthly Price
+    name: price
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $69/mo
+    userMultiplied: false
+  - label: Included Credits
+    name: credits
+    type: usage
+    metric: credits
+    limit: 100000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Gas Sponsorship
+    name: gas_sponsorship
+    type: usage
+    metric: usd_gas
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: up to $250 included
+    userMultiplied: false
+  elements:
+  - name: Bundler RPC (mainnet)
+  - name: Paymaster RPC (mainnet)
+  - name: Kernel SDK
+  - name: Team Support Access
+  - name: Community Support Channel
+- id: zerodev-scale
+  name: Scale
+  type: paid
+  description: >-
+    For established projects needing advanced features and peak performance;
+    larger Credit pool, larger sponsorship allowance, Smart Routing address, and
+    self-funded paymaster access.
+  entries:
+  - label: Monthly Price
+    name: price
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $399/mo
+    userMultiplied: false
+  - label: Included Credits
+    name: credits
+    type: usage
+    metric: credits
+    limit: 1000000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Gas Sponsorship
+    name: gas_sponsorship
+    type: usage
+    metric: usd_gas
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: up to $1,000 included
+    userMultiplied: false
+  elements:
+  - name: Smart Routing Address
+  - name: Self-Funded Paymaster
+  - name: Priority Onboarding
+  - name: Team Support Access
+  - name: Custom Product Features and Integrations
+- id: zerodev-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    For products needing absolute reliability, custom integrations, and
+    dedicated support; custom Credits, custom gas sponsorship, and SLA add-on.
+    Contact ZeroDev sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Included Credits
+  - name: Custom Gas Sponsorship & Premium
+  - name: SLA Add-On Available
+  - name: Custom Product Features and Integrations
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZeroDev Bundler & Paymaster RPC",
+    "version": "3.0",
+    "description": "JSON-RPC 2.0 over HTTPS. All calls are an HTTP POST of a {jsonrpc,id,method,params} envelope to a single project-scoped URL: https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}. Authentication is by projectId embedded in the URL path. The same endpoint serves both bundler and paymaster methods; append ?provider=ULTRA_RELAY to route through UltraRelay."
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bundler RPC",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "eth_sendUserOperation", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "type": "json",
+              "data": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"eth_sendUserOperation\",\"params\":[{\"sender\":\"0x1234567890123456789012345678901234567890\",\"nonce\":\"0x0\",\"callData\":\"0x\",\"callGasLimit\":\"0x88b8\",\"verificationGasLimit\":\"0x33450\",\"preVerificationGas\":\"0xc350\",\"maxFeePerGas\":\"0x59682f00\",\"maxPriorityFeePerGas\":\"0x3b9aca00\",\"signature\":\"0x\"},\"0x0000000071727De22E5E9d8BAf0edAc6f37da032\"]}"
+            }
+          },
+          "docs": "Submit a signed UserOperation to the bundler. Returns the userOpHash."
+        },
+        {
+          "info": { "name": "eth_estimateUserOperationGas", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "type": "json",
+              "data": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"eth_estimateUserOperationGas\",\"params\":[{\"sender\":\"0x1234567890123456789012345678901234567890\",\"nonce\":\"0x0\",\"callData\":\"0x\",\"signature\":\"0x\"},\"0x0000000071727De22E5E9d8BAf0edAc6f37da032\"]}"
+            }
+          },
+          "docs": "Estimate preVerificationGas, verificationGasLimit, and callGasLimit for a UserOperation."
+        },
+        {
+          "info": { "name": "eth_getUserOperationByHash", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "type": "json",
+              "data": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"eth_getUserOperationByHash\",\"params\":[\"0xdead00000000000000000000000000000000000000000000000000000000beef\"]}"
+            }
+          },
+          "docs": "Look up a UserOperation by its hash."
+        },
+        {
+          "info": { "name": "eth_getUserOperationReceipt", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "type": "json",
+              "data": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"eth_getUserOperationReceipt\",\"params\":[\"0xdead00000000000000000000000000000000000000000000000000000000beef\"]}"
+            }
+          },
+          "docs": "Fetch the receipt for an included UserOperation."
+        },
+        {
+          "info": { "name": "eth_supportedEntryPoints", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "type": "json",
+              "data": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"eth_supportedEntryPoints\",\"params\":[]}"
+            }
+          },
+          "docs": "List the EntryPoint contract addresses (v0.6 / v0.7) the bundler supports."
+        },
+        {
+          "info": { "name": "eth_chainId", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "type": "json",
+              "data": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"eth_chainId\",\"params\":[]}"
+            }
+          },
+          "docs": "Return the chain ID served by this RPC."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Paymaster RPC",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "zd_sponsorUserOperation", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "type": "json",
+              "data": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"zd_sponsorUserOperation\",\"params\":[{\"chainId\":8453,\"userOp\":{\"sender\":\"0x1234567890123456789012345678901234567890\",\"nonce\":\"0x0\",\"callData\":\"0x\",\"signature\":\"0x\"}}]}"
+            }
+          },
+          "docs": "ZeroDev gas sponsorship. Returns the paymaster fields and updated gas values."
+        },
+        {
+          "info": { "name": "pm_sponsorUserOperation", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "type": "json",
+              "data": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"pm_sponsorUserOperation\",\"params\":[{\"sender\":\"0x1234567890123456789012345678901234567890\",\"nonce\":\"0x0\",\"callData\":\"0x\",\"signature\":\"0x\"},\"0x0000000071727De22E5E9d8BAf0edAc6f37da032\"]}"
+            }
+          },
+          "docs": "Pimlico-compatible sponsorship. Returns paymasterAndData (v0.6) or paymaster fields (v0.7)."
+        },
+        {
+          "info": { "name": "pm_getPaymasterStubData", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "type": "json",
+              "data": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"pm_getPaymasterStubData\",\"params\":[{\"sender\":\"0x1234567890123456789012345678901234567890\",\"nonce\":\"0x0\",\"callData\":\"0x\"},\"0x0000000071727De22E5E9d8BAf0edAc6f37da032\",\"0x2105\",{}]}"
+            }
+          },
+          "docs": "ERC-7677 stub paymaster data, used upstream to derive preVerificationGas."
+        },
+        {
+          "info": { "name": "pm_getPaymasterData", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "type": "json",
+              "data": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"pm_getPaymasterData\",\"params\":[{\"sender\":\"0x1234567890123456789012345678901234567890\",\"nonce\":\"0x0\",\"callData\":\"0x\"},\"0x0000000071727De22E5E9d8BAf0edAc6f37da032\",\"0x2105\",{}]}"
+            }
+          },
+          "docs": "ERC-7677 final paymaster data and signed paymaster fields."
+        },
+        {
+          "info": { "name": "zd_getERC20PaymasterAddress", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "type": "json",
+              "data": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"zd_getERC20PaymasterAddress\",\"params\":[{\"entryPoint\":\"0x0000000071727De22E5E9d8BAf0edAc6f37da032\",\"gasToken\":\"0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913\"}]}"
+            }
+          },
+          "docs": "Resolve the ERC-20 paymaster address for paying gas with a given token."
+        }
+      ]
+    }
+  ]
+}

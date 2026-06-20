@@ -1,0 +1,110 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: ZeroDev
+providerId: zerodev
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- Account Abstraction
+- ERC-4337
+- Paymaster
+- Bundler
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of ZeroDev spend. ZeroDev bills a flat monthly plan fee
+  (Developer / Growth / Scale / Enterprise) that includes a pool of Credits
+  consumed by UserOperations and infra calls, plus an included gas-sponsorship
+  budget. The two primary cost drivers are (1) Credit consumption from UserOp
+  volume across the bundler and paymaster RPCs and (2) on-chain gas sponsored to
+  users via the paymaster, which is drawn from the included allowance and then
+  billed at cost. Paying gas with ERC-20s and self-funded paymasters shift gas
+  cost onto the end user or the project's own deposited funds.
+notes: >-
+  Plan fees, included Credits, and included gas-sponsorship amounts are subject
+  to change; verify against the ZeroDev pricing page and dashboard usage during
+  reconciliation.
+sources:
+- https://zerodev.app/pricing
+- https://docs.zerodev.app/meta-infra/rpcs
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: ZeroDev
+serviceCategory: Web3 Infrastructure
+billingModel:
+  pricingCategory: Subscription + Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: ZeroDev Meta-Infrastructure
+  ServiceCategory: Web3 Infrastructure
+  ProviderName: ZeroDev
+  PublisherName: ZeroDev
+  InvoiceIssuerName: ZeroDev
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Subscription + Usage-Based
+meters:
+- name: plan_fee
+  description: Flat monthly plan subscription (Developer / Growth / Scale / Enterprise).
+  unit: subscription
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: credits
+  description: Credits consumed by UserOperations and bundler/paymaster infra calls.
+  unit: credits
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+  - chain
+- name: user_operations
+  description: UserOperations submitted via eth_sendUserOperation through the bundler RPC.
+  unit: operations
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+  - chain
+- name: sponsored_gas
+  description: On-chain gas sponsored to users via the paymaster, drawn from the included budget then billed at cost.
+  unit: usd_gas
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+  - chain
+- name: erc20_gas
+  description: Gas paid by end users in ERC-20 tokens via the ERC-20 paymaster (zd_getERC20PaymasterAddress).
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+  - gasToken
+principles:
+- name: Visibility
+  description: Pull ZeroDev dashboard usage; track Credit burn and sponsored-gas spend per project and chain.
+- name: Allocation
+  description: Use one project per app/team; map projects to internal cost centers.
+- name: Optimization
+  description: Tighten paymaster sponsorship policies; route gas to ERC-20 or self-funded paymasters where users can pay; use UltraRelay for cost efficiency; pick the right plan tier to match UserOp volume.
+- name: Accountability
+  description: Assign owners per project; review Credit and gas-sponsorship spend monthly against budget and plan allowance.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
