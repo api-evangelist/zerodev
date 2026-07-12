@@ -112,6 +112,8 @@ apis:
     users deposit and have assets routed across chains. Provider selection is
     controlled with the ?provider query parameter (e.g. ULTRA_RELAY).
 common:
+- type: DomainSecurity
+  url: security/zerodev-domain-security.yml
 - type: GitHubOrganization
   url: https://github.com/zerodevapp
 - type: LinkedIn
