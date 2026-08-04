@@ -1,0 +1,14 @@
+{
+  "provider": "zerodev",
+  "sources": [
+    "zerodev-json-rpc-api-openapi.yml"
+  ],
+  "outputs": [
+    "zerodev-json-rpc-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
