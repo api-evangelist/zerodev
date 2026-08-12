@@ -58,6 +58,9 @@ apis:
   - type: Documentation
     url: https://docs.zerodev.app/sdk/infra/intro
 common:
+- type: License
+  name: MIT
+  url: https://github.com/zerodevapp/sdk/blob/main/LICENSE
 - type: AgenticAccess
   url: agentic-access/zerodev-agentic-access.yml
 - type: DomainSecurity
