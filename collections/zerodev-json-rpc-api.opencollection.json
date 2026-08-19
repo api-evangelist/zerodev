@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ZeroDev Bundler & Paymaster RPC JSON-RPC API",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "JSON-RPC",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ZeroDev bundler & paymaster JSON-RPC endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rpc.zerodev.app/api/v3/:projectId/chain/:chainId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "ZeroDev project ID from the dashboard; acts as the API credential."
+              },
+              {
+                "name": "chainId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric EVM chain ID of the target network."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Optional underlying provider override (e.g. ULTRA_RELAY)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Single JSON-RPC 2.0 endpoint. POST a request envelope whose \"method\" selects an ERC-4337 bundler method or a ZeroDev/ERC-7677 paymaster method. The projectId path parameter authenticates the call; the chainId path parameter selects the target EVM chain (e.g. 1 Ethereum, 8453 Base, 42161 Arbitrum, 84532 Base Sepolia)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
