@@ -7,6 +7,20 @@ description: ZeroDev is account-abstraction / smart-wallet infrastructure for EV
   exposed as JSON-RPC over HTTPS, plus the Kernel smart-account SDK and a meta-aggregator
   (Smart Routing). Apps sponsor gas, let users pay gas in ERC-20s, and submit
   UserOperations through a single project-scoped RPC endpoint.
+deliveryModel:
+  model: open-core
+  license: MIT
+  open_source: true
+  commercial: true
+  callable_host: true
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: unknown
@@ -58,6 +72,8 @@ apis:
   - type: Documentation
     url: https://docs.zerodev.app/sdk/infra/intro
 common:
+- type: IssueTracker
+  url: https://github.com/zerodevapp/sdk/issues
 - type: License
   name: MIT
   url: https://github.com/zerodevapp/sdk/blob/main/LICENSE
