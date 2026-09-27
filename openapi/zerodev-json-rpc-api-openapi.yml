@@ -235,6 +235,15 @@ components:
           type: array
           description: Positional parameters; shape depends on the method.
           items: {}
+    JsonRpcError:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          description: Optional error detail.
     JsonRpcResponse:
       type: object
       required:
@@ -253,12 +262,3 @@ components:
           description: Present on success; shape depends on the method.
         error:
           $ref: '#/components/schemas/JsonRpcError'
-    JsonRpcError:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        data:
-          description: Optional error detail.
