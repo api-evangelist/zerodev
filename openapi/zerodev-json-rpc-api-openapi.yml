@@ -201,6 +201,33 @@ paths:
                       message: Invalid params
 components:
   schemas:
+    JsonRpcError:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          description: Optional error detail.
+    JsonRpcResponse:
+      type: object
+      required:
+      - jsonrpc
+      - id
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+        id:
+          oneOf:
+          - type: integer
+          - type: string
+        result:
+          description: Present on success; shape depends on the method.
+        error:
+          $ref: '#/components/schemas/JsonRpcError'
     JsonRpcRequest:
       type: object
       required:
@@ -235,30 +262,3 @@ components:
           type: array
           description: Positional parameters; shape depends on the method.
           items: {}
-    JsonRpcError:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        data:
-          description: Optional error detail.
-    JsonRpcResponse:
-      type: object
-      required:
-      - jsonrpc
-      - id
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-        id:
-          oneOf:
-          - type: integer
-          - type: string
-        result:
-          description: Present on success; shape depends on the method.
-        error:
-          $ref: '#/components/schemas/JsonRpcError'
