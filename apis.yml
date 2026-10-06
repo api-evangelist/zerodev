@@ -44,7 +44,7 @@ tags:
 - JSON-RPC
 - Web3
 created: '2026-06-20'
-modified: '2026-06-20'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: zerodev:zerodev-json-rpc-api
@@ -72,6 +72,8 @@ apis:
   - type: Documentation
     url: https://docs.zerodev.app/sdk/infra/intro
 common:
+- url: https://www.zerodev.app/blog
+  type: Blog
 - type: IssueTracker
   url: https://github.com/zerodevapp/sdk/issues
 - type: License
