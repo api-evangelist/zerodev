@@ -1,4 +1,4 @@
-# ZeroDev (zerodev)
+# ZeroDev
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,134 +66,115 @@
 
 ZeroDev is account-abstraction / smart-wallet infrastructure for EVM chains. It runs an ERC-4337 (and EIP-7702) bundler RPC and a paymaster RPC, both exposed as JSON-RPC over HTTPS, plus the Kernel smart-account SDK and a meta-aggregator (Smart Routing). Apps sponsor gas, let users pay gas in ERC-20s, and submit UserOperations through a single project-scoped RPC endpoint.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/zerodev/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/zerodev/refs/heads/main/apis.yml)
+**Areas:** Account Abstraction · Smart Wallets · ERC-4337 · EIP-7702 · Paymaster · Bundler · JSON-RPC · Web3
 
-## Tags
+## ZeroDev on APIs.io
 
-- Account Abstraction
-- Smart Wallets
-- ERC-4337
-- EIP-7702
-- Paymaster
-- Bundler
-- JSON-RPC
-- Web3
+Everything profiled for ZeroDev is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/zerodev/](https://apis.io/providers/zerodev/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (1)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [ZeroDev JSON-RPC API](https://apis.io/apis/zerodev/zerodev-json-rpc-api/) — The JSON-RPC API from ZeroDev — 1 operation(s) for json-rpc.
 
-## Transport
+### Published properties
 
-ZeroDev's bundler and paymaster are **JSON-RPC 2.0 over HTTPS**, not REST. All calls are an HTTP `POST` of a `{"jsonrpc":"2.0","id":1,"method":"...","params":[...]}` envelope to a single project-scoped URL:
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-```
-https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}
-```
+#### Agentic access (1)
 
-Authentication is by **project ID embedded in the URL path** (no header key). The same URL serves both bundler and paymaster methods; append `?provider=ULTRA_RELAY` to route through ZeroDev UltraRelay.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## APIs
+- [Zerodev Agentic Access](https://apis.io/agentic-access/zerodev/zerodev-agentic-access/)
 
-### ZeroDev Bundler RPC
+#### Collections (2)
 
-ERC-4337 bundler exposed as JSON-RPC over HTTPS. A single POST to the project-scoped RPC URL carries methods eth_sendUserOperation, eth_estimateUserOperationGas, eth_getUserOperationByHash, eth_getUserOperationReceipt, eth_supportedEntryPoints, and eth_chainId for EntryPoint v0.6 and v0.7. Authentication is by project ID embedded in the URL path; append ?provider=ULTRA_RELAY to route through ZeroDev UltraRelay.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://docs.zerodev.app/meta-infra/rpcs](https://docs.zerodev.app/meta-infra/rpcs)
-- **Base URL:** `https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}`
+- [ZeroDev Bundler & Paymaster RPC](https://apis.io/collections/zerodev/open-zerodev/)
+- [ZeroDev Bundler & Paymaster RPC JSON-RPC API](https://apis.io/collections/zerodev/open-zerodev-json-rpc-api/)
 
-#### Tags
+#### Security (1)
 
-- Bundler
-- ERC-4337
-- UserOperation
-- JSON-RPC
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Zerodev Domain Security](https://apis.io/security/zerodev/zerodev-domain-security/)
 
-- [Documentation](https://docs.zerodev.app/meta-infra/rpcs)
-- [API Reference](https://docs.zerodev.app/meta-infra/rpcs)
-- [OpenAPI](openapi/zerodev-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/zerodev.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/zerodev.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### ZeroDev Paymaster RPC
+Published plans, tiers and prices.
 
-Verifying and ERC-20 paymaster exposed as JSON-RPC over the same project-scoped RPC URL. Methods include zd_sponsorUserOperation (ZeroDev sponsorship), pm_sponsorUserOperation (Pimlico-compatible sponsorship), the ERC-7677 pair pm_getPaymasterStubData / pm_getPaymasterData, and zd_getERC20PaymasterAddress for paying gas with ERC-20 tokens. Returns the signed paymaster fields the bundler needs.
+- [Zerodev Plans Pricing](https://apis.io/plans/zerodev/zerodev-plans-pricing/)
 
-- **Human URL:** [https://docs.zerodev.app/sdk/core-api/sponsor-gas](https://docs.zerodev.app/sdk/core-api/sponsor-gas)
-- **Base URL:** `https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Paymaster
-- Gas Sponsorship
-- ERC-7677
-- JSON-RPC
+- [Zerodev Rate Limits](https://apis.io/rate-limits/zerodev/zerodev-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://docs.zerodev.app/sdk/core-api/sponsor-gas)
-- [API Reference](https://docs.zerodev.app/meta-infra/rpcs)
-- [OpenAPI](openapi/zerodev-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/zerodev.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/zerodev.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### ZeroDev Kernel SDK
+- [Zerodev Finops](https://apis.io/finops/zerodev/zerodev-finops/)
 
-Kernel is ZeroDev's modular ERC-4337 and EIP-7702 smart-account implementation. The TypeScript Kernel SDK (built on viem / permissionless) builds and signs UserOperations, then drives the bundler and paymaster RPCs. Kernel v3 supports EIP-7702 delegation alongside classic 4337 deployment.
+## Where to find this API
 
-- **Human URL:** [https://docs.zerodev.app/sdk/getting-started/quickstart](https://docs.zerodev.app/sdk/getting-started/quickstart)
-- **Base URL:** `https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Kernel
-- SDK
-- Smart Account
-- EIP-7702
-
-#### Properties
-
-- [Documentation](https://docs.zerodev.app/sdk/getting-started/quickstart)
-- [Source Code](https://github.com/zerodevapp/sdk)
-- [OpenAPI](openapi/zerodev-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/zerodev.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/zerodev.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ZeroDev Meta-Aggregator (Smart Routing)
-
-ZeroDev's meta-infrastructure aggregates underlying bundler and paymaster providers behind one project-scoped RPC, with Smart Routing that lets users deposit and have assets routed across chains. Provider selection is controlled with the ?provider query parameter (e.g. ULTRA_RELAY).
-
-- **Human URL:** [https://docs.zerodev.app/sdk/infra/intro](https://docs.zerodev.app/sdk/infra/intro)
-- **Base URL:** `https://rpc.zerodev.app/api/v3/{projectId}/chain/{chainId}`
-
-#### Tags
-
-- Meta-Aggregator
-- Smart Routing
-- Cross-Chain
-- Intents
-
-#### Properties
-
-- [Documentation](https://docs.zerodev.app/sdk/infra/intro)
-- [OpenAPI](openapi/zerodev-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/zerodev.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/zerodev.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/zerodevapp)
-- [LinkedIn](https://www.linkedin.com/company/zerodev)
 - [Website](https://zerodev.app)
 - [Documentation](https://docs.zerodev.app)
-- [Plans](plans/zerodev-plans-pricing.yml)
-- [Rate Limits](rate-limits/zerodev-rate-limits.yml)
-- [Fin Ops](finops/zerodev-finops.yml)
+- [Blog](https://www.zerodev.app/blog)
+- [GitHub](https://github.com/zerodevapp)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 19.7** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 45.9 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 20.2 |
+| Access clarity | 7.9 |
+
+**Agent readiness 20.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.4** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/zerodev/](https://apis.io/providers/zerodev/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for ZeroDev: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/zerodev/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
